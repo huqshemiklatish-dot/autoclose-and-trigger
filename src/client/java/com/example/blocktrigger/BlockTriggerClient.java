@@ -1,24 +1,24 @@
-package com.example.blocktrigger;
+// Other code above
 
-import net.fabricmc.api.ModInitializer;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.RaycastContext;
-import net.minecraft.block.Block;
+    public boolean isTargetBlock(Block block) {
+        return switch (block) {
+            // Other cases
 
-public class BlockTriggerClient implements ModInitializer {
-    @Override
-    public void onInitialize() {
-        // Mod initialization code
+            // Adding player head blocks to the target blocks list
+            Blocks.PLAYER_HEAD,
+            Blocks.PLAYER_WALL_HEAD,
+            Blocks.CREEPER_HEAD,
+            Blocks.CREEPER_WALL_HEAD,
+            Blocks.DRAGON_HEAD,
+            Blocks.DRAGON_WALL_HEAD,
+            Blocks.SKELETON_SKULL,
+            Blocks.SKELETON_WALL_SKULL,
+            Blocks.WITHER_SKELETON_SKULL,
+            Blocks.WITHER_SKELETON_WALL_SKULL,
+            Blocks.ZOMBIE_HEAD -> true;
+
+            // Other cases
+
+            default -> false;
+        };
     }
-
-    private void performRightClick() {
-        MinecraftClient client = MinecraftClient.getInstance();
-        BlockPos pos = client.crosshairTarget.getBlockPos();
-        if (client.world.getBlockState(pos).getBlock() instanceof Block) {
-            client.interactionManager.interactBlock(client.player, Hand.MAIN_HAND, client.world, pos);
-        }
-    }
-}
